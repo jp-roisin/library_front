@@ -7,7 +7,7 @@ const headers = {
   Authorization: "Bearer " + localStorage.getItem("token"),
 };
 
-function parseJwt(token) {
+const parseJwt = (token) => {
   var base64Url = token.split(".")[1];
   var base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
   var jsonPayload = decodeURIComponent(
@@ -20,23 +20,26 @@ function parseJwt(token) {
   );
 
   return JSON.parse(jsonPayload);
-}
+};
 
 export const BookInfo = ({ book, onRefetch }) => {
   // RENT BOOK
-  const onBookRent = (id) => {
-    const data = parseJwt(localStorage.getItem("token"))
-    console.log(data)
-    // const data = { id, };
-    // const formatedData = JSON.parse(JSON.stringify(data));
-    // axios
-    //   .post("http://localhost:8000/api/create/location", formatedData, {
-    //     headers,
-    //   })
-    //   .then((res) => {
-    //     console.log(res);
-    //   });
-    // onRefetch();
+  const onBookRent = (bookId) => {
+    const tokenData = parseJwt(localStorage.getItem("token"));
+    const data = { id: bookId, user: { id: tokenData.id } };
+    const formatedData = JSON.parse(JSON.stringify(data));
+    axios
+      .post("http://localhost:8000/api/create/location", formatedData, {
+        headers,
+      })
+      .then((res) => {
+        if (res.status === 200) {
+          onRefetch();
+        }
+        else {
+          console.log("Nope rent book")
+        }
+      });
   };
 
   return (
