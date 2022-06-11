@@ -4,18 +4,39 @@ import axios from "axios";
 const headers = {
   "Content-Type": "application/json",
   Accept: "application/json",
-  Authorization: "Bearer" + localStorage.getItem("token"),
+  Authorization: "Bearer " + localStorage.getItem("token"),
 };
 
-export const BookInfo = ({ book, onRefetch }) => {
+function parseJwt(token) {
+  var base64Url = token.split(".")[1];
+  var base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
+  var jsonPayload = decodeURIComponent(
+    atob(base64)
+      .split("")
+      .map(function (c) {
+        return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
+      })
+      .join("")
+  );
 
-  // RENT BOOK 
-  const onBookRent = (isbn) => {
-    console.log("isbn", isbn);
-    axios.get("http://localhost:8000/books/location", isbn, { headers }).then((res) => {
-      console.log(res);
-    });
-    onRefetch();
+  return JSON.parse(jsonPayload);
+}
+
+export const BookInfo = ({ book, onRefetch }) => {
+  // RENT BOOK
+  const onBookRent = (id) => {
+    const data = parseJwt(localStorage.getItem("token"))
+    console.log(data)
+    // const data = { id, };
+    // const formatedData = JSON.parse(JSON.stringify(data));
+    // axios
+    //   .post("http://localhost:8000/api/create/location", formatedData, {
+    //     headers,
+    //   })
+    //   .then((res) => {
+    //     console.log(res);
+    //   });
+    // onRefetch();
   };
 
   return (
@@ -44,7 +65,7 @@ export const BookInfo = ({ book, onRefetch }) => {
           <Button
             variant="contained"
             color="success"
-            onClick={() => onBookRent(book.isbn)}
+            onClick={() => onBookRent(book.id)}
           >
             Louer (4,99 €/semaine)
           </Button>
@@ -53,7 +74,7 @@ export const BookInfo = ({ book, onRefetch }) => {
             variant="contained"
             disabled
             color="success"
-            onClick={() => onBookRent(book.isbn)}
+            onClick={() => onBookRent(book.id)}
           >
             Louer (4,99 €/semaine)
           </Button>
