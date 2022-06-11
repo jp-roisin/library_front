@@ -7,16 +7,16 @@ import { ListBooks } from "./components/library/ListBooks";
 
 const headers = {
   "Content-Type": "application/json",
-  "Accept": "application/json",
+  Accept: "application/json",
 };
 
 const App = () => {
-  const [loginMode, setLoginMode] = useState(false);
+  const [authMode, setAuthMode] = useState(false);
 
   const logoutHandler = () => {
-    localStorage.removeItem("token")
-    setLoginMode(true);
- }
+    localStorage.removeItem("token");
+    setAuthMode(true);
+  };
 
   const loginHandler = (data) => {
     const formatedData = JSON.parse(JSON.stringify(data));
@@ -24,10 +24,10 @@ const App = () => {
       .post(`http://localhost:8000/api/login_check`, formatedData, { headers })
       .then((res) => {
         if (res.data.token) {
-          localStorage.setItem("token", res.data.token)
-          setLoginMode(false);
+          localStorage.setItem("token", res.data.token);
+          setAuthMode(false);
         } else {
-          console.log("Nope login check")
+          console.log("Nope login check");
         }
       });
   };
@@ -38,7 +38,7 @@ const App = () => {
       .post(`http://localhost:8000/api/register`, formatedData, { headers })
       .then((res) => {
         if (res.data.users) {
-          setLoginMode(false);
+          setAuthMode(false);
         } else {
           console.log("NOPE");
         }
@@ -47,12 +47,12 @@ const App = () => {
 
   return (
     <>
-      {!loginMode && (
+      {!authMode && (
         <DefaultLayout logout={logoutHandler}>
           <ListBooks />
         </DefaultLayout>
       )}
-      {loginMode && (
+      {authMode && (
         <UnlogedLayout>
           <Authentification
             onLogin={loginHandler}

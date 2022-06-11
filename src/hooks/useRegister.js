@@ -10,7 +10,6 @@ export const useRegister = (data) => {
   const [error, setError] = useState(null);
   const [response, setResponse] = useState();
   const formatedData = JSON.parse(JSON.stringify(data));
-
   try {
     axios
       .post(`http://localhost:8000/api/register`, formatedData, { headers })
@@ -24,6 +23,5 @@ export const useRegister = (data) => {
   } catch (err) {
     setError(err.message || "Something went wrong!");
   }
-
   return {error, response}
 };
