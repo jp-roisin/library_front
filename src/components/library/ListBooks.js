@@ -49,7 +49,6 @@ export const ListBooks = () => {
         a.title < b.title ? -1 : a.title > b.title ? +1 : 0
       );
       setBookList({ initial: filterdResponse, curent: filterdResponse });
-      console.log("just fetched all books");
     });
   }, [refetchOnRent]);
 
@@ -66,11 +65,11 @@ export const ListBooks = () => {
         )}
       </>
       <div className="flex justify-center mb-6">
-        <div className="w-[300px]">
+        <div className="w-[500px] bg-red">
           <TextField
             name="filter"
-            fullwidth
-            label="Search"
+            fullWidth
+            label="Search by title or author"
             onChange={onSearch}
           />
         </div>

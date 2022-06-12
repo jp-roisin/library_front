@@ -1,5 +1,6 @@
 import { Button } from "@mui/material";
 import { useState } from "react";
+import { Manager } from "../../library/Manager";
 import { Modal } from "../../ui/Modal";
 
 export const Header = ({ logout }) => {
@@ -31,14 +32,14 @@ export const Header = ({ logout }) => {
       <>
         {scanModalIsOpen && (
           <Modal onCloseModal={() => setScanModalIsOpen(false)}>
-          <div className="m-6">
-            <p>
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Vel esse
-              nulla possimus sed molestias omnis quos excepturi, totam
-              aspernatur officiis vitae. Modi cum atque impedit delectus
-              corporis praesentium tempore tenetur?
-            </p>
-          </div>
+            <div>
+              <div className="text-center py-8 mb-8 text-xl italic bg-primary text-white font-semibold">
+                Scan ISBN
+              </div>
+              <div className="mx-6 mb-6">
+                <Manager />
+              </div>
+            </div>
           </Modal>
         )}
       </>
