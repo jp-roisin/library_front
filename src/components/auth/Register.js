@@ -46,8 +46,8 @@ export const Register = ({ onRegister, children }) => {
           />
           <TextField
             id="pw"
-            name="pw"
             fullwidth
+            name="pw"
             variant="standard"
             placeholder="Password"
             type="password"

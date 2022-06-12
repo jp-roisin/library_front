@@ -23,7 +23,6 @@ const parseJwt = (token) => {
 };
 
 export const BookInfo = ({ book, onRefetch }) => {
-  // RENT BOOK
   const onBookRent = (bookId) => {
     const tokenData = parseJwt(localStorage.getItem("token"));
     const data = { id: bookId, user: { id: tokenData.id } };
@@ -70,7 +69,7 @@ export const BookInfo = ({ book, onRefetch }) => {
             color="success"
             onClick={() => onBookRent(book.id)}
           >
-            Louer (4,99 €/semaine)
+            Louer (0,99 €/2semaines)
           </Button>
         ) : (
           <Button
@@ -79,7 +78,7 @@ export const BookInfo = ({ book, onRefetch }) => {
             color="success"
             onClick={() => onBookRent(book.id)}
           >
-            Louer (4,99 €/semaine)
+            Louer (0,99 €/2semaines)
           </Button>
         )}
       </div>

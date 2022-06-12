@@ -16,11 +16,7 @@ export const ListBooks = () => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [selectedBook, setSelectedBook] = useState();
   const [bookList, setBookList] = useState({ initial: [], curent: [] });
-  const [refetchOnRent, setRefetchOnRent] = useState(false)
-
-  const modalHandler = () => {
-    setModalIsOpen((prevValue) => !prevValue);
-  };
+  const [refetchOnRent, setRefetchOnRent] = useState(false);
 
   const onSearch = (input) => {
     setBookList({
@@ -53,7 +49,7 @@ export const ListBooks = () => {
         a.title < b.title ? -1 : a.title > b.title ? +1 : 0
       );
       setBookList({ initial: filterdResponse, curent: filterdResponse });
-      console.log("just fetched all books")
+      console.log("just fetched all books");
     });
   }, [refetchOnRent]);
 
@@ -61,8 +57,11 @@ export const ListBooks = () => {
     <>
       <>
         {modalIsOpen && (
-          <Modal onCloseModal={modalHandler}>
-            <BookInfo book={{ ...selectedBook }} onRefetch={() => setRefetchOnRent(prev => !prev)} />
+          <Modal onCloseModal={() => setModalIsOpen(false)}>
+            <BookInfo
+              book={{ ...selectedBook }}
+              onRefetch={() => setRefetchOnRent((prev) => !prev)}
+            />
           </Modal>
         )}
       </>
@@ -70,7 +69,7 @@ export const ListBooks = () => {
         <div className="w-[300px]">
           <TextField
             name="filter"
-            fullWidth
+            fullwidth
             label="Search"
             onChange={onSearch}
           />
@@ -89,34 +88,32 @@ export const ListBooks = () => {
           <TableBody>
             {bookList.length !== 0 &&
               bookList.curent.map((item) => (
-                <>
-                  <TableRow
-                    key={item.id}
-                    sx={{
-                      cursor: "pointer",
-                      "&:last-child td, &:last-child th": { border: 0 },
-                    }}
-                    onClick={() => {
-                      setSelectedBook(item);
-                      setModalIsOpen(true);
-                    }}
-                  >
-                    <TableCell component="th" scope="row" align="left">
-                      {item.title}
-                    </TableCell>
-                    <TableCell component="th" scope="row" align="left">
-                      {item.author}
-                    </TableCell>
-                    <TableCell align="left">{item.category}</TableCell>
-                    <TableCell align="left">
-                      {item.isRented === null || !item.isRented ? (
-                        <SuccessTag />
-                      ) : (
-                        <ErrorTag />
-                      )}
-                    </TableCell>
-                  </TableRow>
-                </>
+                <TableRow
+                  key={item.id}
+                  sx={{
+                    cursor: "pointer",
+                    "&:last-child td, &:last-child th": { border: 0 },
+                  }}
+                  onClick={() => {
+                    setSelectedBook(item);
+                    setModalIsOpen(true);
+                  }}
+                >
+                  <TableCell component="th" scope="row" align="left">
+                    {item.title}
+                  </TableCell>
+                  <TableCell component="th" scope="row" align="left">
+                    {item.author}
+                  </TableCell>
+                  <TableCell align="left">{item.category}</TableCell>
+                  <TableCell align="left">
+                    {item.isRented === null || !item.isRented ? (
+                      <SuccessTag />
+                    ) : (
+                      <ErrorTag />
+                    )}
+                  </TableCell>
+                </TableRow>
               ))}
           </TableBody>
         </Table>
