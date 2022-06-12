@@ -19,7 +19,7 @@ export const Register = ({ onRegister, children }) => {
         <div className="flex flex-col">
           <TextField
             id="lastName"
-            fullwidth
+            fullWidth
             name="lastName"
             variant="standard"
             placeholder="Nom"
@@ -28,7 +28,7 @@ export const Register = ({ onRegister, children }) => {
           />
           <TextField
             id="firstName"
-            fullwidth
+            fullWidth
             name="firstName"
             variant="standard"
             placeholder="Prénom"
@@ -37,7 +37,7 @@ export const Register = ({ onRegister, children }) => {
           />
           <TextField
             id="email"
-            fullwidth
+            fullWidth
             name="email"
             variant="standard"
             placeholder="Email"
@@ -46,7 +46,7 @@ export const Register = ({ onRegister, children }) => {
           />
           <TextField
             id="pw"
-            fullwidth
+            fullWidth
             name="pw"
             variant="standard"
             placeholder="Password"

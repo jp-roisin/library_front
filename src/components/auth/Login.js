@@ -17,7 +17,7 @@ export const Login = ({ onlogin, children }) => {
         <div className="flex flex-col">
           <TextField
             id="username"
-            fullwidth
+            fullWidth
             name="username"
             variant="standard"
             placeholder="Email"
@@ -27,7 +27,7 @@ export const Login = ({ onlogin, children }) => {
           <TextField
             id="pw"
             name="pw"
-            fullwidth
+            fullWidth
             variant="standard"
             type="password"
             placeholder="Password"
