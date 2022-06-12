@@ -44,7 +44,7 @@ export const BookInfo = ({ book, onRefetch }) => {
 
   return (
     <>
-      <div className="text-center py-8 mb-8 text-2xl italic bg-primary text-white font-semibold">
+      <div className="text-center py-8 mb-8 text-xl italic bg-primary text-white font-semibold">
         <h2>{book.title}</h2>
         <h2>{book.author}</h2>
       </div>
@@ -54,11 +54,11 @@ export const BookInfo = ({ book, onRefetch }) => {
       <div className="flex justify-between mx-4 mb-8 overflow-auto">
         {book.cover && (
           <div className="flex-1">
-            <img width="300" src={book.cover} alt="première de couverture" />
+            <img width="220" src={book.cover} alt="première de couverture" />
           </div>
         )}
         {book.description && (
-          <div className="mx-6 flex-1 h-[200px]">
+          <div className="mx-6 flex-1 h-[150px] text-justify">
             <p>{book.description}</p>
           </div>
         )}
