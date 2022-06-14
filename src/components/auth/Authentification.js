@@ -7,12 +7,12 @@ export const Authentification = ({ onLogin, onRegister }) => {
   const [registerMode, setRegisterMode] = useState(false)
   return (
     <>
-    {registerMode && 
+    {!registerMode && 
       <Login onlogin={onLogin}>
         <Button onClick={() => setRegisterMode(prev => !prev)} variant="text">M'enregistrer</Button>
       </Login>
     }
-    {!registerMode &&
+    {registerMode &&
       <Register onRegister={onRegister}>
         <Button onClick={() => setRegisterMode(prev => !prev)} variant="text">J'ai déjà un compte</Button>
       </Register>

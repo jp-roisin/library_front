@@ -58,7 +58,7 @@ export const Register = ({ onRegister, children }) => {
         <div className="mt-8 flex justify-between">
         {children}
           <Button variant="contained" onClick={() => onRegister(inputs)}>
-            Login
+            Sign in 
           </Button>
         </div>
       </form>

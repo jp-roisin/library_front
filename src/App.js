@@ -11,7 +11,7 @@ const headers = {
 };
 
 const App = () => {
-  const [authMode, setAuthMode] = useState(false);
+  const [authMode, setAuthMode] = useState(true);
 
   const logoutHandler = () => {
     localStorage.removeItem("token");
