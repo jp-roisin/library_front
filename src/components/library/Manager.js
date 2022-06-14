@@ -3,6 +3,13 @@ import Scanner from "./Scanner";
 import { Result } from "./Result";
 import { Button } from "@mui/material";
 import { useEffect } from "react";
+import axios from "axios";
+
+const headers = {
+  "Content-Type": "application/json",
+  Accept: "application/json",
+  Authorization: "Bearer " + localStorage.getItem("token"),
+};
 
 export const Manager = () => {
   const [scanning, setScanning] = useState(false);
@@ -10,9 +17,28 @@ export const Manager = () => {
   const scannerRef = useRef(null);
 
   useEffect(() => {
-    if (results) {
-      console.log(results);
-    }
+    const postIsbn = () => {
+      if (results.length !== 0) {
+        const isbn = results[results.length - 1];
+        axios
+          .post(
+            `http://localhost:8000/api/searchBOOKS/${isbn}`,
+            {},
+            {
+              headers,
+            }
+          )
+          .then((res) => {
+            console.log(res);
+          });
+      }
+    };
+
+    const timer = setTimeout(() => {
+      postIsbn();
+    }, 2000);
+
+    return () => clearTimeout(timer);
   }, [results]);
 
   return (

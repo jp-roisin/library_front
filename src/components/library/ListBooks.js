@@ -10,7 +10,7 @@ import { SuccessTag, ErrorTag } from "../ui/Tag";
 import { Modal } from "../ui/Modal";
 import { BookInfo } from "./BookInfo";
 import axios from "axios";
-import { TextField } from "@mui/material";
+import { Button, TextField } from "@mui/material";
 
 export const ListBooks = () => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -64,7 +64,7 @@ export const ListBooks = () => {
           </Modal>
         )}
       </>
-      <div className="flex justify-center mb-6">
+      <div className="flex justify-between mb-6">
         <div className="w-[500px] bg-red">
           <TextField
             name="filter"
@@ -72,6 +72,16 @@ export const ListBooks = () => {
             label="Search by title or author"
             onChange={onSearch}
           />
+        </div>
+        <div>
+          <Button
+            size="large"
+            color="error"
+            variant="text"
+            onClick={() => setRefetchOnRent((prev) => !prev)}
+          >
+            Refresh
+          </Button>
         </div>
       </div>
       <TableContainer component={Paper}>
